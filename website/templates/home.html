@@ -7,10 +7,37 @@
     <div class="list-items">
       {{ recipe.data }}
     </div>
-    <div class="clearfix">  
+    <div class="buttons">  
       <button type="button" class="btn btn-danger float-right ml-2" onClick="deleteRecipe({{ recipe.id }})">Delete</button>
       <button type="button" class="btn btn-warning float-right ml-2" onClick="">View Ingredients</button>
-      <button type="button" class="btn btn-success float-right" onClick="">Add Ingredients</button>
+      <button type="button" class="btn btn-success float-right" onClick="showForm()">Add Ingredients</button>
+    </div>
+    <div class="ingredients" style="display: inline;">
+      <form id="add_ingredients" style="display: none;">
+        <div class="form-row align-items-center">
+          <div class="col-auto my-1">
+            <input class="form-control form-control-sm" name="" id="" type="text" placeholder="Ingredient">
+          </div>
+          <div class="col-auto my-1">
+            <input class="form-control form-control-sm" name="" id="" type="text" placeholder="Quantity">
+          </div>
+          <div class="col-auto my-1">
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+              <option selected>Units</option>
+              <option value="1">tsp</option>
+              <option value="2">tbsp</option>
+              <option value="3">fl oz</option>
+              <option value="4">c</option>
+              <option value="5">pt</option>
+              <option value="6">qt</option>
+              <option value="7">gal</option>
+            </select>
+          </div>
+          <div class="col-auto my-1">
+            <button type="submit" class="btn btn-primary">Add Ingredient</button>
+          </div>
+        </div>
+      </form>
     </div>
   </li>
   {% endfor %}

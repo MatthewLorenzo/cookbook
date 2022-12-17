@@ -6,3 +6,7 @@ function deleteRecipe(recipeId) {
     window.location.href = "/";
   });
 }
+function showForm() {
+  document.getElementById('add_ingredients').style.display = 'block'
+  document.getElementById('add_ingredients').style.marginTop = '50px';
+}
