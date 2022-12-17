@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Note
+from .models import Recipe
 from website.__init_ import db
 import json
 
@@ -11,26 +11,25 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     if request.method == 'POST':
-        note = request.form.get('note')
+        recipe = request.form.get('recipe')
 
-        if len(note) < 1:
-            flash('Note is too short!', category='error')
+        if len(recipe) < 1:
+            flash('Please Enter a Valid Recipe!', category='error')
         else:
-            new_note = Note(data=note, user_id=current_user.id)
-            db.session.add(new_note)
+            new_recipe = Recipe(data=recipe, user_id=current_user.id)
+            db.session.add(new_recipe)
             db.session.commit()
-            flash('Note added!', category='success')
 
     return render_template("home.html", user=current_user)
 
-@views.route('/delete-note', methods=['POST'])
+@views.route('/delete-recipe', methods=['POST'])
 def delete_note():
-  note = json.loads(request.data)
-  noteId = note['noteId']
-  note = Note.query.get(noteId)
-  if note:
-    if note.user_id == current_user.id:
-      db.session.delete(note)
+  recipe = json.loads(request.data)
+  recipeId = recipe['recipeId']
+  recipe = Recipe.query.get(recipeId)
+  if recipe:
+    if recipe.user_id == current_user.id:
+      db.session.delete(recipe)
       db.session.commit()
 
   return jsonify({})

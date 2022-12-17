@@ -1,21 +1,25 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}
 {% block content %}
-<h1 align="center">Notes</h1>
-<ul class="list-group list-group-flush" id="notes">
-  {% for note in user.notes %}
+<h1 align="center" style="margin-top: 20px;">Recipes</h1>
+<ul class="list-group list-group-flush" id="recipes">
+  {% for recipe in user.recipes %}
   <li class="list-group-item">
-    {{ note.data }}
-    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <div class="list-items">
+      {{ recipe.data }}
+    </div>
+    <div class="clearfix">  
+      <button type="button" class="btn btn-danger float-right ml-2" onClick="deleteRecipe({{ recipe.id }})">Delete</button>
+      <button type="button" class="btn btn-warning float-right ml-2" onClick="">View Ingredients</button>
+      <button type="button" class="btn btn-success float-right" onClick="">Add Ingredients</button>
+    </div>
   </li>
   {% endfor %}
 </ul>
 <form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
+  <input class="form-control form-control-lg" name="recipe" id="recipe" type="text" placeholder="Enter the Name of your Recipe!">
   <br />
   <div align="center">
-    <button type="submit" class="btn btn-primary">Add Note</button>
+    <button type="submit" class="btn btn-primary">Add Recipe</button>
   </div>
 </form>
 {% endblock %}
